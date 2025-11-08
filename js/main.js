@@ -3,7 +3,6 @@ import { Game } from "./modules/game.js";
 import { UI } from "./modules/ui.js";
 import { BiomeSystem } from "./modules/biome.js";
 import { Logger } from "./modules/logger.js";
-import { AstrologyEventGenerator } from "./modules/astrology.js";
 import { formatDateTime } from "./modules/utils.js";
 
 const canvas=document.getElementById("gameCanvas");
@@ -17,10 +16,11 @@ const logContainer=document.getElementById("logContainer");
 const grid=new Grid(96,72);
 const logger=new Logger(logContainer);
 const biomeSystem=new BiomeSystem(grid,logger);
-const astrology=new AstrologyEventGenerator(logger);
-const game=new Game(grid,ctx,genCounter,popCounter,biomeCounter,biomeSystem,logger,astrology);
+const game=new Game(grid,ctx,genCounter,popCounter,biomeCounter,biomeSystem,logger);
 const ui=new UI(game,logger);
 
 datetime.textContent=formatDateTime();
 setInterval(()=>datetime.textContent=formatDateTime(),60000);
 ui.bindControls();
+game.draw();
+game.updateStats();
