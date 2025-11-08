@@ -1,8 +1,10 @@
 ﻿export class Game {
-  constructor(grid,ctx,genCounter,popCounter,biomeCounter,biomeSystem,logger){
+  constructor(grid,ctx,genCounter,popCounter,biomeCounter,biomeSystem,logger,astrologyGenerator){
     this.grid=grid;this.ctx=ctx;this.genCounter=genCounter;this.popCounter=popCounter;
     this.biomeCounter=biomeCounter;this.biomeSystem=biomeSystem;this.logger=logger;
+    this.astrologyGenerator=astrologyGenerator;
     this.running=false;this.generation=0;this.interval=150;this.cellSize=10;
+    this.astrologyChance=.05;
   }
   start(){if(!this.running){this.running=true;this.logger.add("Simulacion iniciada");this.loop();}}
   pause(){this.running=false;this.logger.add("Simulacion pausada");}
@@ -20,9 +22,17 @@
         const n=this.countNeighbors(x,y),c=this.grid.get(x,y);
         newGrid[y][x]=(c&&(n==2||n==3))||(!c&&n==3)?1:0;
       }}
-    this.grid.cells=newGrid;this.biomeSystem.updateBiomes();this.generation++;
+    this.grid.cells=newGrid;this.biomeSystem.updateBiomes();this.maybeTriggerAstrologyEvent();this.generation++;
   }
   countNeighbors(x,y){let s=0;for(let dy=-1;dy<=1;dy++){for(let dx=-1;dx<=1;dx++){if(dx==0&&dy==0)continue;s+=this.grid.get(x+dx,y+dy);}}return s;}
   draw(){const c=this.ctx,g=this.grid,cs=this.cellSize;c.clearRect(0,0,c.canvas.width,c.canvas.height);
     for(let y=0;y<g.rows;y++){for(let x=0;x<g.cols;x++){if(g.get(x,y)){c.fillStyle=this.biomeSystem.getColorAt(x,y);c.fillRect(x*cs,y*cs,cs-1,cs-1);}}}}
+  triggerAstrologyEvent(){if(this.astrologyGenerator)this.astrologyGenerator.emitEvent();}
+  maybeTriggerAstrologyEvent(){
+    if(!this.astrologyGenerator)return;
+    if(Math.random()<this.astrologyChance){
+      const omen=this.astrologyGenerator.generateEvent();
+      this.logger.add("Presagio estelar: "+omen);
+    }
+  }
 }
