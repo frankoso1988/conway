@@ -22,3 +22,5 @@ const ui=new UI(game,logger);
 datetime.textContent=formatDateTime();
 setInterval(()=>datetime.textContent=formatDateTime(),60000);
 ui.bindControls();
+game.draw();
+game.updateStats();
