@@ -1,0 +1,7 @@
+﻿body{font-family:Arial,sans-serif;background:#050010;color:#ddd;display:flex;flex-direction:column;align-items:center;margin:0;height:100vh;}
+canvas{background:#111;border:2px solid #7f00ff;border-radius:10px;margin-top:10px;image-rendering:pixelated;}
+.controls{display:flex;flex-wrap:wrap;gap:10px;margin-top:10px;justify-content:center;}
+button{background:#4b0082;border:none;border-radius:5px;color:white;padding:8px 16px;cursor:pointer;transition:.2s;}
+button:hover{transform:scale(1.05);background:#7f00ff;}
+.log{width:90%;max-width:960px;height:150px;overflow-y:auto;border:1px solid #331155;border-radius:8px;background:rgba(20,0,40,.6);margin-top:15px;padding:10px;}
+#logContainer{font-size:.9em;color:#b8a3ff;white-space:pre-wrap;line-height:1.3em;}

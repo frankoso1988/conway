@@ -1,0 +1,35 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Juego de la Vida Modular v2.0 - Evolución</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
+</head>
+<body>
+  <header>
+    <h1>Juego de la Vida - Evolución Modular</h1>
+    <p>Generación: <span id="gen">0</span> | Población: <span id="pop">0</span> | Biomas: <span id="biomes">0</span></p>
+  </header>
+  <main>
+    <canvas id="gameCanvas" width="960" height="720"></canvas>
+    <section class="controls">
+      <button id="startBtn">Iniciar</button>
+      <button id="pauseBtn">Pausar</button>
+      <button id="clearBtn">Limpiar</button>
+      <button id="randomBtn">Aleatorio</button>
+      <button id="evoBtn">Evolución</button>
+      <label>Velocidad: <input type="range" id="speedRange" min="50" max="1000" step="50" value="150" /></label>
+    </section>
+    <section class="log">
+      <h2>Diario de Evolución</h2>
+      <div id="logContainer"></div>
+    </section>
+  </main>
+  <footer>
+    <p>Versión 2.0 - Sistema vivo experimental <span id="datetime"></span></p>
+  </footer>
+  <script type="module" src="js/main.js"></script>
+</body>
+</html>
